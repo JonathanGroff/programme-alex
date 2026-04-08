@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mon Programme">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzUzNEFCNyIvPgogIDxyZWN0IHg9IjQiIHk9IjE0IiB3aWR0aD0iMjQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iMiIgeT0iMTAiIHdpZHRoPSI1IiBoZWlnaHQ9IjEyIiByeD0iMi41IiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjI1IiB5PSIxMCIgd2lkdGg9IjUiIGhlaWdodD0iMTIiIHJ4PSIyLjUiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iMCIgeT0iMTIiIHdpZHRoPSI0IiBoZWlnaHQ9IjgiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjI4IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgcng9IjIiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzUzNEFCNyIvPgogIDxyZWN0IHg9IjQiIHk9IjE0IiB3aWR0aD0iMjQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iMiIgeT0iMTAiIHdpZHRoPSI1IiBoZWlnaHQ9IjEyIiByeD0iMi41IiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjI1IiB5PSIxMCIgd2lkdGg9IjUiIGhlaWdodD0iMTIiIHJ4PSIyLjUiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iMCIgeT0iMTIiIHdpZHRoPSI0IiBoZWlnaHQ9IjgiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjI4IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgcng9IjIiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==">
+<title>Mon Programme</title>
+<style>
+:root{
+  --push:#534AB7;--push-l:#EEEDFE;--push-d:#3C3489;
+  --pull:#0F6E56;--pull-l:#E1F5EE;--pull-d:#085041;
+  --legs:#993C1D;--legs-l:#FAECE7;--legs-d:#712B13;
+  --upper:#185FA5;--upper-l:#E6F1FB;--upper-d:#0C447C;
+  --lower:#854F0B;--lower-l:#FAEEDA;--lower-d:#633806;
+  --bg:#fff;--bg2:#f6f6f2;--bg3:#ebebeb;
+  --text:#1a1a1a;--text2:#666;--text3:#aaa;
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
+  --r:12px;--rs:8px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1a1a1a;--bg2:#252525;--bg3:#303030;
+  --text:#f0f0f0;--text2:#999;--text3:#555;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
+  --push-l:#26215C;--pull-l:#04342C;--legs-l:#4A1B0C;--upper-l:#042C53;--lower-l:#412402;
+}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;color:var(--text)}
+
+.hdr{background:var(--bg);border-bottom:.5px solid var(--border);padding:14px 14px 0;position:sticky;top:0;z-index:50}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.app-name{font-size:20px;font-weight:700;letter-spacing:-.5px}
+.streak{font-size:12px;font-weight:600;background:var(--bg2);color:var(--text2);padding:4px 10px;border-radius:999px;border:.5px solid var(--border2)}
+.tabs{display:flex;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:9px 14px;font-size:13px;font-weight:600;border:none;border-radius:var(--rs) var(--rs) 0 0;background:var(--bg2);color:var(--text2);cursor:pointer;-webkit-appearance:none}
+.tab.ap{background:var(--push-l);color:var(--push-d)}
+.tab.al{background:var(--pull-l);color:var(--pull-d)}
+.tab.ag{background:var(--legs-l);color:var(--legs-d)}
+.tab.au{background:var(--upper-l);color:var(--upper-d)}
+.tab.aw{background:var(--lower-l);color:var(--lower-d)}
+
+.day{display:none;padding:12px 14px 110px}
+.day.active{display:block}
+.day-sub{font-size:12px;color:var(--text3);margin-bottom:12px}
+.reset-wrap{text-align:right;margin-bottom:4px}
+.reset-btn{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;-webkit-appearance:none;padding:4px 0}
+.sec{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding:14px 2px 6px;border-bottom:.5px solid var(--border);margin-bottom:8px}
+
+.card{background:var(--bg);border:.5px solid var(--border2);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.card-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.card-left{flex:1;min-width:0}
+.card-name{font-size:15px;font-weight:600;color:var(--text)}
+.card-meta{font-size:12px;color:var(--text2);margin-top:2px}
+.card-right{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.bdg{font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.chev{font-size:10px;color:var(--text3);transition:transform .2s;display:inline-block}
+.chev.open{transform:rotate(180deg)}
+
+.card-det{display:none;border-top:.5px solid var(--border)}
+.card-det.open{display:block}
+.det-inner{padding:12px 14px 14px}
+.drow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:.5px solid var(--border);font-size:14px}
+.drow:last-of-type{border-bottom:none}
+.dlbl{color:var(--text2)}
+.dval{font-weight:600;color:var(--text)}
+
+/* MUSCLES */
+.muscles-box{border-radius:var(--rs);padding:8px 11px;margin:8px 0;font-size:12px;line-height:1.5}
+.muscles-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.muscles-primary{font-weight:600}
+.muscles-secondary{color:var(--text3)}
+
+/* TIP */
+.tip{background:var(--bg2);border-radius:var(--rs);padding:9px 11px;margin:8px 0 6px;font-size:13px;color:var(--text2);line-height:1.5}
+
+/* EDIT SECTION */
+.edit-section{margin:10px 0 8px;background:var(--bg2);border-radius:var(--rs);overflow:hidden}
+.edit-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;cursor:pointer;border:none;background:none;width:100%;-webkit-appearance:none}
+.edit-toggle-lbl{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.edit-toggle-ico{font-size:11px;color:var(--text3);transition:transform .2s}
+.edit-toggle-ico.open{transform:rotate(180deg)}
+.edit-body{display:none;padding:0 12px 12px;border-top:.5px solid var(--border)}
+.edit-body.open{display:block}
+.edit-field{margin-top:10px}
+.edit-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;display:block}
+.edit-input{width:100%;padding:9px 11px;border-radius:var(--rs);border:.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:14px;font-weight:500;-webkit-appearance:none;outline:none}
+.edit-row{display:flex;gap:8px;margin-top:10px}
+.edit-save{flex:1;padding:10px;border-radius:var(--rs);border:none;font-size:13px;font-weight:600;cursor:pointer;color:white;-webkit-appearance:none}
+.edit-cancel{padding:10px 16px;border-radius:var(--rs);border:.5px solid var(--border2);font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);-webkit-appearance:none}
+
+/* DOTS */
+.dots-row{display:flex;gap:7px;margin:8px 0 10px;align-items:center;flex-wrap:wrap}
+.dots-lbl{font-size:12px;color:var(--text3);margin-right:2px}
+.dot{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text3);background:var(--bg2);flex-shrink:0;transition:all .15s}
+
+/* WEIGHT */
+.weight-section{margin:8px 0}
+.weight-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.weight-title{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.weight-toggle{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:.5px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;-webkit-appearance:none}
+.weight-body{display:none;background:var(--bg2);border-radius:var(--rs);padding:10px 12px}
+.weight-body.open{display:block}
+.weight-current{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.weight-input{flex:1;padding:9px 12px;border-radius:var(--rs);border:.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:15px;font-weight:600;-webkit-appearance:none;outline:none}
+.weight-unit{font-size:13px;color:var(--text3)}
+.weight-save-btn{padding:9px 16px;border-radius:var(--rs);border:none;font-size:13px;font-weight:600;cursor:pointer;color:white;white-space:nowrap;-webkit-appearance:none}
+.weight-history{margin-top:8px}
+.weight-hist-title{font-size:11px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.hist-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--border);font-size:13px}
+.hist-row:last-child{border-bottom:none}
+.hist-date{color:var(--text3)}
+.hist-val{font-weight:600;color:var(--text)}
+.hist-empty{font-size:12px;color:var(--text3);text-align:center;padding:8px 0}
+
+.rest-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:12px;border-radius:var(--rs);border:none;font-size:14px;font-weight:600;color:white;cursor:pointer;-webkit-appearance:none;margin-top:4px}
+.rest-btn:active{opacity:.8}
+
+/* TIMER */
+.timer-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;align-items:flex-end;justify-content:center}
+.timer-ov.show{display:flex}
+.timer-sheet{background:var(--bg);border-radius:24px 24px 0 0;padding:24px 28px 44px;width:100%;max-width:500px;text-align:center}
+.t-handle{width:36px;height:4px;background:var(--bg3);border-radius:2px;margin:0 auto 18px}
+.t-exo{font-size:13px;color:var(--text2);margin-bottom:4px}
+.t-disp{font-size:72px;font-weight:700;letter-spacing:-4px;line-height:1;margin-bottom:4px;transition:color .3s}
+.t-sub{font-size:13px;color:var(--text3);margin-bottom:18px}
+.t-bar-wrap{height:6px;background:var(--bg3);border-radius:3px;margin-bottom:24px;overflow:hidden}
+.t-bar{height:6px;border-radius:3px;transition:width .8s linear}
+.t-actions{display:flex;gap:10px}
+.t-btn{flex:1;padding:14px;border-radius:var(--rs);font-size:15px;font-weight:600;cursor:pointer;border:none;-webkit-appearance:none}
+.t-skip{background:var(--bg2);color:var(--text2)}
+
+/* PROG */
+.prog-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:.5px solid var(--border);padding:11px 16px calc(11px + env(safe-area-inset-bottom,0));z-index:40}
+.prog-row{display:flex;align-items:center;gap:10px}
+.prog-lbl{font-size:12px;color:var(--text2);white-space:nowrap}
+.prog-track{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.prog-fill{height:4px;border-radius:2px;transition:width .3s;width:0%}
+.prog-pct{font-size:12px;font-weight:600;color:var(--text2);min-width:32px;text-align:right}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="app-name">Mon Programme</div>
+    <div class="streak" id="streakBadge">0 séances</div>
+  </div>
+  <div class="tabs">
+    <button class="tab ap" data-day="push" onclick="switchDay('push')">Push</button>
+    <button class="tab" data-day="pull" onclick="switchDay('pull')">Pull</button>
+    <button class="tab" data-day="legs" onclick="switchDay('legs')">Legs</button>
+    <button class="tab" data-day="upper" onclick="switchDay('upper')">Upper</button>
+    <button class="tab" data-day="lower" onclick="switchDay('lower')">Lower</button>
+  </div>
+</div>
+
+<div id="day-push" class="day active"><div style="padding-top:10px"><div class="reset-wrap"><button class="reset-btn" onclick="resetDay('push')">Réinitialiser</button></div><div class="day-sub">Pectoraux · Épaules · Triceps</div></div><div id="exos-push"></div></div>
+<div id="day-pull" class="day"><div style="padding-top:10px"><div class="reset-wrap"><button class="reset-btn" onclick="resetDay('pull')">Réinitialiser</button></div><div class="day-sub">Dos · Biceps · Épaules postérieures</div></div><div id="exos-pull"></div></div>
+<div id="day-legs" class="day"><div style="padding-top:10px"><div class="reset-wrap"><button class="reset-btn" onclick="resetDay('legs')">Réinitialiser</button></div><div class="day-sub">Quadriceps · Ischio-jambiers · Mollets · Abdos</div></div><div id="exos-legs"></div></div>
+<div id="day-upper" class="day"><div style="padding-top:10px"><div class="reset-wrap"><button class="reset-btn" onclick="resetDay('upper')">Réinitialiser</button></div><div class="day-sub">Haut du corps complet</div></div><div id="exos-upper"></div></div>
+<div id="day-lower" class="day"><div style="padding-top:10px"><div class="reset-wrap"><button class="reset-btn" onclick="resetDay('lower')">Réinitialiser</button></div><div class="day-sub">Bas du corps complet</div></div><div id="exos-lower"></div></div>
+
+<div class="timer-ov" id="timerOv" onclick="handleOvClick(event)">
+  <div class="timer-sheet">
+    <div class="t-handle"></div>
+    <div class="t-exo" id="tExo"></div>
+    <div class="t-disp" id="tDisp">2:00</div>
+    <div class="t-sub">restantes</div>
+    <div class="t-bar-wrap"><div class="t-bar" id="tBar" style="width:100%"></div></div>
+    <div class="t-actions">
+      <button class="t-btn t-skip" onclick="stopTimer()">Passer</button>
+      <button class="t-btn" id="tDoneBtn" onclick="stopTimer()">Terminer</button>
+    </div>
+  </div>
+</div>
+
+<div class="prog-bar">
+  <div class="prog-row">
+    <span class="prog-lbl" id="progLbl">0 / 0 séries</span>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <span class="prog-pct" id="progPct">0%</span>
+  </div>
+</div>
+
+<script>
+// ─── PROGRAMME DATA ──────────────────────────────────────────────────────────
+var DEFAULT_DAYS = {
+  push:{label:'Push',color:'push',exos:[
+    {name:'Développé couché haltères',sets:4,reps:'8',rest:120,weight:'32',
+     primary:'Grand pectoral (chef sternal)',secondary:'Deltoïde antérieur · Triceps brachial',
+     tip:'Descente contrôlée · arc naturel · pause en bas'},
+    {name:'Développé incliné haltères',sets:4,reps:'8',rest:90,weight:'26',
+     primary:'Grand pectoral (chef claviculaire)',secondary:'Deltoïde antérieur · Triceps',
+     tip:'Inclinaison ~30° · descente lente 3s · ne dépasse pas 45°'},
+    {name:'Élévations latérales',sets:4,reps:'12',rest:60,weight:'12/8',
+     primary:'Deltoïde latéral',secondary:'Deltoïde antérieur · Trapèze supérieur',
+     tip:'Coude légèrement fléchi · tempo lent · câble ou haltère'},
+    {name:'Élévations frontales haltères',sets:3,reps:'12',rest:60,weight:'8',
+     primary:'Deltoïde antérieur',secondary:'Grand pectoral (chef claviculaire) · Trapèze',
+     tip:'Montée à hauteur des yeux · descente contrôlée · ne balance pas'},
+    {name:'Dips lesté',sets:3,reps:'8',rest:90,weight:'',
+     primary:'Grand pectoral · Triceps brachial',secondary:'Deltoïde antérieur · Grand dentelé',
+     tip:'Buste légèrement penché · coudes pas trop écartés · ROM complet'},
+    {name:'Pec fly machine',sets:3,reps:'12',rest:60,weight:'66',
+     primary:'Grand pectoral (isolation)',secondary:'Deltoïde antérieur',
+     tip:'Contraction peak · ne verrouille pas les coudes · descente contrôlée'},
+    {name:'Extension triceps poulie',sets:3,reps:'12',rest:60,weight:'24,8',
+     primary:'Triceps brachial (chef latéral + médial)',secondary:'Anconé',
+     tip:'Ouverture de la corde en fin · contraction iso 1s · coudes fixes'},
+    {name:'Extension triceps unilatéral',sets:3,reps:'12',rest:60,weight:'9',
+     primary:'Triceps brachial (long chef)',secondary:'Anconé',
+     tip:'Coude fixe · ROM complet · correction des déséquilibres'}
+  ]},
+  pull:{label:'Pull',color:'pull',exos:[
+    {name:'Tractions pronation lestées',sets:4,reps:'max',rest:120,weight:'',
+     primary:'Grand dorsal · Grand rond',secondary:'Biceps brachial · Rhomboïdes · Trapèze inférieur',
+     tip:'Full ROM · descente complète · initiation par les dorsaux · lest si besoin'},
+    {name:'Rowing barre',sets:4,reps:'10',rest:90,weight:'70',
+     primary:'Trapèze moyen/inférieur · Rhomboïdes · Érecteurs',secondary:'Grand dorsal · Biceps · Deltoïde postérieur',
+     tip:'Dos quasi-parallèle · coudes 45° · amplitude max · ne soulève pas le buste'},
+    {name:'Tirage horizontal',sets:4,reps:'10',rest:90,weight:'59',
+     primary:'Grand dorsal · Grand rond',secondary:'Biceps brachial · Rhomboïdes · Trapèze',
+     tip:'Prise neutre · tirage vers le nombril · contraction peak · coudes serrés'},
+    {name:'Face pull',sets:3,reps:'15',rest:60,weight:'27',
+     primary:'Deltoïde postérieur · Rotateurs externes (infra-épineux · petit rond)',secondary:'Trapèze moyen · Rhomboïdes',
+     tip:'Hauteur des yeux · rotation externe en fin · coudes hauts · protège la coiffe'},
+    {name:'Arrière épaule',sets:3,reps:'15',rest:60,weight:'4,5/66',
+     primary:'Deltoïde postérieur',secondary:'Infra-épineux · Petit rond · Rhomboïdes',
+     tip:'Buste incliné · coudes semi-fléchis · amplitude maximale · léger'},
+    {name:'Shrugs',sets:3,reps:'12',rest:60,weight:'60',
+     primary:'Trapèze supérieur',secondary:'Élévateur de la scapula · Rhomboïdes',
+     tip:'Pause 1s en haut · ne tourne pas les épaules · descente lente'},
+    {name:'Curl biceps barre',sets:3,reps:'12',rest:60,weight:'30',
+     primary:'Biceps brachial (long + court chef)',secondary:'Brachial · Brachioradial',
+     tip:'Coudes fixes · descente complète · pas de balancé'},
+    {name:'Curl marteau',sets:2,reps:'12',rest:60,weight:'',
+     primary:'Brachial · Brachioradial',secondary:'Biceps brachial',
+     tip:'Prise neutre · ROM complet · épaisseur du bras'},
+    {name:'Rowing YTWB',sets:2,reps:'12',rest:60,weight:'',
+     primary:'Trapèze (toutes portions) · Rhomboïdes · Rotateurs externes',secondary:'Deltoïde postérieur · Grand dentelé',
+     tip:'4 lettres enchaînées · charge très légère · focus scapulaire · santé épaule'}
+  ]},
+  legs:{label:'Legs',color:'legs',exos:[
+    {name:'Squat machine',sets:4,reps:'8',rest:120,weight:'60',
+     primary:'Quadriceps (vaste latéral, médial, droit fémoral)',secondary:'Grand fessier · Ischio-jambiers · Mollets',
+     tip:'Profondeur parallèle · gainage · descente lente · genoux alignés'},
+    {name:'Presse',sets:4,reps:'10',rest:90,weight:'120',
+     primary:'Quadriceps · Grand fessier',secondary:'Ischio-jambiers · Adducteurs',
+     tip:'Pieds hauts pour plus de fessiers · amplitude max · ne verrouille pas les genoux'},
+    {name:'Soulevé jambes tendues',sets:4,reps:'8',rest:90,weight:'40',
+     primary:'Ischio-jambiers (semi-tendineux, biceps fémoral)',secondary:'Grand fessier · Érecteurs du rachis',
+     tip:'Dos plat · ischio en étirement maximal · descente lente · hanche charnière'},
+    {name:'Fentes',sets:3,reps:'12',rest:90,weight:'',
+     primary:'Quadriceps · Grand fessier',secondary:'Ischio-jambiers · Adducteurs · Mollets',
+     tip:'Pas long · genou avant 90° · buste droit · correction des déséquilibres'},
+    {name:'Leg curl',sets:3,reps:'12',rest:60,weight:'',
+     primary:'Ischio-jambiers (isolation)',secondary:'Gastrocnémien (chef court)',
+     tip:'Contraction peak · descente contrôlée · hanche fixe'},
+    {name:'Leg extension',sets:3,reps:'12',rest:60,weight:'66/39',
+     primary:'Quadriceps (isolation · vaste médial)',secondary:'Droit fémoral',
+     tip:'Contraction isométrique 1s en haut · descente lente · genou aligné'},
+    {name:'Mollets debout',sets:4,reps:'15',rest:60,weight:'40',
+     primary:'Gastrocnémien (chef médial + latéral)',secondary:'Soléaire · Tibial postérieur',
+     tip:'Amplitude totale · pause en bas · montée explosive · pieds parallèles'},
+    {name:'Gainage + planche latérale',sets:3,reps:'60s',rest:0,weight:'',
+     primary:'Transverse de l\'abdomen · Obliques',secondary:'Érecteurs du rachis · Carré des lombes · Fessiers',
+     tip:'Corps parfaitement aligné · respiration abdominale · hanches hautes en latéral'},
+    {name:'Abdos',sets:4,reps:'10',rest:60,weight:'',
+     primary:'Droit de l\'abdomen',secondary:'Obliques · Transverse',
+     tip:'Mouvement contrôlé · expiration en montant · pas de traction nuque'}
+  ]},
+  upper:{label:'Upper',color:'upper',exos:[
+    {name:'Développé couché haltères',sets:4,reps:'8',rest:120,weight:'',
+     primary:'Grand pectoral (chef sternal)',secondary:'Deltoïde antérieur · Triceps',
+     tip:'Descente contrôlée · arc naturel · pause en bas'},
+    {name:'Tractions',sets:4,reps:'max',rest:120,weight:'',
+     primary:'Grand dorsal · Grand rond',secondary:'Biceps · Rhomboïdes · Trapèze inférieur',
+     tip:'Full ROM · initiation par les dorsaux · descente complète'},
+    {name:'Développé militaire',sets:4,reps:'10',rest:120,weight:'',
+     primary:'Deltoïde antérieur + latéral',secondary:'Triceps brachial · Trapèze supérieur',
+     tip:'Assis · descente à 90° · gainage · pas de lordose'},
+    {name:'Élévations latérales',sets:4,reps:'12',rest:60,weight:'',
+     primary:'Deltoïde latéral',secondary:'Deltoïde antérieur · Trapèze supérieur',
+     tip:'Tempo lent · coude légèrement fléchi · ne hausse pas les épaules'},
+    {name:'Rowing unilatéral haltère',sets:3,reps:'10',rest:90,weight:'',
+     primary:'Grand dorsal · Rhomboïdes · Trapèze moyen',secondary:'Biceps brachial · Érecteurs',
+     tip:'Amplitude totale · légère rotation du buste · coude haut en fin'},
+    {name:'Dips',sets:3,reps:'8',rest:90,weight:'',
+     primary:'Grand pectoral · Triceps brachial',secondary:'Deltoïde antérieur · Grand dentelé',
+     tip:'Buste légèrement incliné · coudes pas trop écartés'},
+    {name:'Curl biceps barre',sets:3,reps:'10',rest:60,weight:'',
+     primary:'Biceps brachial',secondary:'Brachial · Brachioradial',
+     tip:'Coudes fixes · ROM complet · descente contrôlée'},
+    {name:'Curl incliné haltères',sets:2,reps:'12',rest:60,weight:'',
+     primary:'Biceps brachial (long chef · étirement max)',secondary:'Brachial',
+     tip:'Épaule en extension complète · ne balance pas · angle ~50°'},
+    {name:'Extension triceps',sets:3,reps:'10',rest:60,weight:'',
+     primary:'Triceps brachial (3 chefs)',secondary:'Anconé',
+     tip:'Coude fixe · ROM complet · contraction peak'}
+  ]},
+  lower:{label:'Lower',color:'lower',exos:[
+    {name:'Squat ou Hack squat',sets:4,reps:'6–8',rest:120,weight:'',
+     primary:'Quadriceps · Grand fessier',secondary:'Ischio-jambiers · Adducteurs · Érecteurs',
+     tip:'Profondeur complète · gainage total · descente lente · dos neutre'},
+    {name:'Soulevé jambes tendues',sets:4,reps:'8–10',rest:90,weight:'',
+     primary:'Ischio-jambiers · Grand fessier',secondary:'Érecteurs du rachis · Adducteurs',
+     tip:'Dos plat · ischio en étirement max · hanche charnière'},
+    {name:'Fentes marchées',sets:3,reps:'10–12',rest:90,weight:'',
+     primary:'Quadriceps · Grand fessier',secondary:'Ischio-jambiers · Adducteurs · Mollets',
+     tip:'Pas long · genou avant à 90° · buste droit · gainage'},
+    {name:'Leg curl',sets:3,reps:'12–15',rest:60,weight:'',
+     primary:'Ischio-jambiers (isolation)',secondary:'Gastrocnémien',
+     tip:'Contraction peak · descente contrôlée · hanche fixe'},
+    {name:'Mollets assis',sets:4,reps:'15–20',rest:60,weight:'',
+     primary:'Soléaire',secondary:'Gastrocnémien · Tibial postérieur',
+     tip:'Amplitude totale · pause en bas · genou à 90°'},
+    {name:'Mollets debout',sets:3,reps:'15–20',rest:60,weight:'',
+     primary:'Gastrocnémien',secondary:'Soléaire · Tibial postérieur',
+     tip:'Amplitude totale · montée explosive · pieds parallèles'},
+    {name:'Abdos crunch lesté',sets:3,reps:'15',rest:60,weight:'',
+     primary:'Droit de l\'abdomen',secondary:'Obliques · Transverse',
+     tip:'Mouvement lent · expiration en montant · charge légère'},
+    {name:'Planche dynamique',sets:3,reps:'60s',rest:0,weight:'',
+     primary:'Transverse · Obliques · Érecteurs',secondary:'Grand fessier · Épaules',
+     tip:'Corps aligné · alterner les appuis · respiration continue'}
+  ]}
+};
+
+var COLORS = {
+  push:{bg:'#534AB7',light:'#EEEDFE',dark:'#3C3489'},
+  pull:{bg:'#0F6E56',light:'#E1F5EE',dark:'#085041'},
+  legs:{bg:'#993C1D',light:'#FAECE7',dark:'#712B13'},
+  upper:{bg:'#185FA5',light:'#E6F1FB',dark:'#0C447C'},
+  lower:{bg:'#854F0B',light:'#FAEEDA',dark:'#633806'}
+};
+
+// ─── STORAGE HELPERS ─────────────────────────────────────────────────────────
+function ls(key,def){try{var v=localStorage.getItem(key);return v!==null?JSON.parse(v):def;}catch(e){return def;}}
+function lsSet(key,val){try{localStorage.setItem(key,JSON.stringify(val));}catch(e){}}
+
+function getDays(){return ls('programme_days',DEFAULT_DAYS);}
+function saveDays(d){lsSet('programme_days',d);}
+function getSets(day,i){return ls('sets_'+day+'_'+i,[]);}
+function saveSets(day,i,arr){lsSet('sets_'+day+'_'+i,arr);}
+function getWeights(day,i){return ls('weights_'+day+'_'+i,[]);}
+function saveWeightEntry(day,i,val){
+  var arr=getWeights(day,i);
+  var today=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
+  if(arr.length&&arr[arr.length-1].date===today)arr[arr.length-1].val=val;
+  else arr.push({date:today,val:val});
+  if(arr.length>10)arr=arr.slice(arr.length-10);
+  lsSet('weights_'+day+'_'+i,arr);
+  return arr;
+}
+
+// ─── TIMER STATE ─────────────────────────────────────────────────────────────
+var timerInterval=null;
+var timerEndTime=null;
+var timerTotal=0;
+var timerDay='push';
+
+function startTimer(seconds,name,day){
+  if(timerInterval)clearInterval(timerInterval);
+  timerTotal=seconds;
+  timerDay=day;
+  timerEndTime=Date.now()+seconds*1000;
+  lsSet('timer_end',timerEndTime);
+  lsSet('timer_total',seconds);
+  lsSet('timer_name',name);
+  lsSet('timer_day',day);
+  var c=COLORS[day];
+  document.getElementById('tExo').textContent=name;
+  document.getElementById('tBar').style.background=c.bg;
+  document.getElementById('tDoneBtn').style.background=c.bg;
+  document.getElementById('tDoneBtn').style.color='white';
+  document.getElementById('tDoneBtn').textContent='Terminer';
+  document.getElementById('tDisp').style.color=c.bg;
+  document.getElementById('timerOv').classList.add('show');
+  runTimerTick();
+  timerInterval=setInterval(runTimerTick,500);
+}
+
+function runTimerTick(){
+  var left=Math.max(0,Math.round((timerEndTime-Date.now())/1000));
+  var m=Math.floor(left/60),s=left%60;
+  document.getElementById('tDisp').textContent=m+':'+(s<10?'0':'')+s;
+  var pct=timerTotal>0?Math.round((left/timerTotal)*100):0;
+  document.getElementById('tBar').style.width=pct+'%';
+  if(left<=0){
+    clearInterval(timerInterval);timerInterval=null;
+    document.getElementById('tDisp').textContent='Go !';
+    document.getElementById('tDoneBtn').textContent="C'est parti !";
+    if(navigator.vibrate)navigator.vibrate([200,100,200]);
+    lsSet('timer_end',null);
+  }
+}
+
+function stopTimer(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  lsSet('timer_end',null);
+  document.getElementById('timerOv').classList.remove('show');
+}
+
+function handleOvClick(e){if(e.target===document.getElementById('timerOv'))stopTimer();}
+
+function checkRestoredTimer(){
+  var end=ls('timer_end',null);
+  if(!end)return;
+  var left=Math.round((end-Date.now())/1000);
+  if(left<=0){lsSet('timer_end',null);return;}
+  var name=ls('timer_name','Repos');
+  var day=ls('timer_day','push');
+  var total=ls('timer_total',120);
+  timerTotal=total;timerDay=day;timerEndTime=end;
+  var c=COLORS[day]||COLORS.push;
+  document.getElementById('tExo').textContent=name;
+  document.getElementById('tBar').style.background=c.bg;
+  document.getElementById('tDoneBtn').style.background=c.bg;
+  document.getElementById('tDoneBtn').style.color='white';
+  document.getElementById('tDisp').style.color=c.bg;
+  document.getElementById('timerOv').classList.add('show');
+  runTimerTick();
+  timerInterval=setInterval(runTimerTick,500);
+}
+
+// ─── CURRENT DAY ─────────────────────────────────────────────────────────────
+var currentDay='push';
+
+function switchDay(day){
+  currentDay=day;
+  document.querySelectorAll('.tab').forEach(function(t){t.className='tab';});
+  var map={push:'ap',pull:'al',legs:'ag',upper:'au',lower:'aw'};
+  document.querySelector('[data-day="'+day+'"]').className='tab '+map[day];
+  document.querySelectorAll('.day').forEach(function(d){d.classList.remove('active');});
+  document.getElementById('day-'+day).classList.add('active');
+  document.querySelectorAll('.card-det.open').forEach(function(d){
+    d.classList.remove('open');
+    d.previousElementSibling.querySelector('.chev').classList.remove('open');
+  });
+  window.scrollTo(0,0);
+  updateProgress();
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function fmtRest(s){
+  if(s===0)return 'Aucun';
+  if(s<60)return s+'s';
+  var m=Math.floor(s/60),sec=s%60;
+  return m+'min'+(sec?sec+'s':'');
+}
+
+function renderDay(day){
+  var days=getDays();
+  var data=days[day];
+  var c=COLORS[data.color||day];
+  var html='';
+  data.exos.forEach(function(exo,i){
+    var savedSets=getSets(day,i);
+    var weights=getWeights(day,i);
+    var lastW=weights.length?weights[weights.length-1].val:exo.weight;
+    var restLabel=fmtRest(exo.rest);
+
+    // dots
+    var dotsHtml='<span class="dots-lbl">Séries</span>';
+    for(var s=0;s<exo.sets;s++){
+      var done=savedSets.indexOf(s)!==-1;
+      dotsHtml+='<div class="dot" id="dot-'+day+'-'+i+'-'+s+'" onclick="toggleDot(\''+day+'\','+i+','+s+')" style="'+(done?'background:'+c.bg+';border-color:'+c.bg+';color:white;':'')+'">'+(s+1)+'</div>';
+    }
+
+    // weight history
+    var histHtml='';
+    if(weights.length){
+      weights.slice().reverse().slice(0,5).forEach(function(w){
+        histHtml+='<div class="hist-row"><span class="hist-date">'+w.date+'</span><span class="hist-val">'+w.val+' kg</span></div>';
+      });
+    } else { histHtml='<div class="hist-empty">Aucun historique</div>'; }
+
+    var restBtn=exo.rest>0?'<button class="rest-btn" style="background:'+c.bg+'" onclick="startTimer('+exo.rest+',\''+exo.name.replace(/'/g,"\\'")+'\',' +'\''+day+'\')">Repos '+restLabel+' →</button>':'';
+
+    html+='<div class="card" id="card-'+day+'-'+i+'">'
+      +'<div class="card-hdr" onclick="toggleCard(this)">'
+        +'<div class="card-left">'
+          +'<div class="card-name" id="cname-'+day+'-'+i+'">'+exo.name+'</div>'
+          +'<div class="card-meta" id="cmeta-'+day+'-'+i+'">'+exo.sets+'×'+exo.reps+' · '+restLabel+(lastW?' · <b>'+lastW+' kg</b>':'')+'</div>'
+        +'</div>'
+        +'<div class="card-right">'
+          +'<span class="bdg" style="background:'+c.light+';color:'+c.dark+'">'+exo.sets+'×'+exo.reps+'</span>'
+          +'<span class="chev">▼</span>'
+        +'</div>'
+      +'</div>'
+      +'<div class="card-det" id="det-'+day+'-'+i+'">'
+        +'<div class="det-inner">'
+          +'<div class="drow"><span class="dlbl">Séries × Reps</span><span class="dval">'+exo.sets+' × '+exo.reps+'</span></div>'
+          +'<div class="drow"><span class="dlbl">Repos</span><span class="dval">'+restLabel+'</span></div>'
+          // MUSCLES
+          +'<div class="muscles-box" style="background:'+c.light+'">'
+            +'<div class="muscles-title" style="color:'+c.dark+'">Muscles travaillés</div>'
+            +'<div class="muscles-primary" style="color:'+c.dark+'">'+exo.primary+'</div>'
+            +'<div class="muscles-secondary">'+exo.secondary+'</div>'
+          +'</div>'
+          +'<div class="tip">'+exo.tip+'</div>'
+          +'<div class="dots-row" id="dotsrow-'+day+'-'+i+'">'+dotsHtml+'</div>'
+          // WEIGHT
+          +'<div class="weight-section">'
+            +'<div class="weight-header">'
+              +'<span class="weight-title">Poids utilisé</span>'
+              +'<button class="weight-toggle" style="background:'+c.light+';color:'+c.dark+'" onclick="toggleWeight(\''+day+'\','+i+')">Voir / modifier</button>'
+            +'</div>'
+            +'<div class="weight-body" id="wbody-'+day+'-'+i+'">'
+              +'<div class="weight-current">'
+                +'<input class="weight-input" id="winput-'+day+'-'+i+'" type="text" inputmode="decimal" placeholder="ex: 32,5" value="'+(lastW||'')+'">'
+                +'<span class="weight-unit">kg</span>'
+                +'<button class="weight-save-btn" style="background:'+c.bg+'" onclick="saveWeightUI(\''+day+'\','+i+')">Sauver</button>'
+              +'</div>'
+              +'<div class="weight-history"><div class="weight-hist-title">Historique</div><div id="whist-'+day+'-'+i+'">'+histHtml+'</div></div>'
+            +'</div>'
+          +'</div>'
+          // EDIT
+          +'<div class="edit-section">'
+            +'<button class="edit-toggle" onclick="toggleEdit(\''+day+'\','+i+')">'
+              +'<span class="edit-toggle-lbl">Modifier l\'exercice</span>'
+              +'<span class="edit-toggle-ico" id="edit-ico-'+day+'-'+i+'">▼</span>'
+            +'</button>'
+            +'<div class="edit-body" id="edit-body-'+day+'-'+i+'">'
+              +'<div class="edit-field"><label class="edit-label">Nom de l\'exercice</label><input class="edit-input" id="edit-name-'+day+'-'+i+'" type="text" value="'+exo.name+'"></div>'
+              +'<div class="edit-field"><label class="edit-label">Séries</label><input class="edit-input" id="edit-sets-'+day+'-'+i+'" type="number" inputmode="numeric" value="'+exo.sets+'"></div>'
+              +'<div class="edit-field"><label class="edit-label">Reps</label><input class="edit-input" id="edit-reps-'+day+'-'+i+'" type="text" value="'+exo.reps+'"></div>'
+              +'<div class="edit-field"><label class="edit-label">Temps de repos (secondes)</label><input class="edit-input" id="edit-rest-'+day+'-'+i+'" type="number" inputmode="numeric" value="'+exo.rest+'"></div>'
+              +'<div class="edit-row">'
+                +'<button class="edit-cancel" onclick="toggleEdit(\''+day+'\','+i+')">Annuler</button>'
+                +'<button class="edit-save" style="background:'+c.bg+'" onclick="saveEdit(\''+day+'\','+i+')">Enregistrer</button>'
+              +'</div>'
+            +'</div>'
+          +'</div>'
+          + restBtn
+        +'</div>'
+      +'</div>'
+    +'</div>';
+  });
+  document.getElementById('exos-'+day).innerHTML=html;
+}
+
+function renderAll(){
+  Object.keys(DEFAULT_DAYS).forEach(function(day){ renderDay(day); });
+  updateProgress();
+  updateStreak();
+}
+
+// ─── INTERACTIONS ─────────────────────────────────────────────────────────────
+function toggleCard(hdr){
+  var det=hdr.nextElementSibling;
+  var chev=hdr.querySelector('.chev');
+  var isOpen=det.classList.contains('open');
+  document.querySelectorAll('.card-det.open').forEach(function(d){
+    d.classList.remove('open');
+    d.previousElementSibling.querySelector('.chev').classList.remove('open');
+  });
+  if(!isOpen){
+    det.classList.add('open');chev.classList.add('open');
+    setTimeout(function(){hdr.scrollIntoView({behavior:'smooth',block:'nearest'});},120);
+  }
+}
+
+function toggleDot(day,idx,s){
+  var arr=getSets(day,idx);
+  var pos=arr.indexOf(s);
+  var c=COLORS[day];
+  var dot=document.getElementById('dot-'+day+'-'+idx+'-'+s);
+  if(pos===-1){arr.push(s);dot.style.cssText='background:'+c.bg+';border-color:'+c.bg+';color:white';}
+  else{arr.splice(pos,1);dot.style.cssText='';}
+  saveSets(day,idx,arr);
+  updateProgress();
+  checkSessionComplete(day);
+}
+
+function toggleWeight(day,idx){
+  var body=document.getElementById('wbody-'+day+'-'+idx);
+  body.classList.toggle('open');
+  if(body.classList.contains('open'))setTimeout(function(){document.getElementById('winput-'+day+'-'+idx).focus();},150);
+}
+
+function saveWeightUI(day,idx){
+  var input=document.getElementById('winput-'+day+'-'+idx);
+  var val=input.value.trim();if(!val)return;
+  var arr=saveWeightEntry(day,idx,val);
+  var histHtml='';
+  arr.slice().reverse().slice(0,5).forEach(function(w){histHtml+='<div class="hist-row"><span class="hist-date">'+w.date+'</span><span class="hist-val">'+w.val+' kg</span></div>';});
+  document.getElementById('whist-'+day+'-'+idx).innerHTML=histHtml;
+  var days=getDays();var exo=days[day].exos[idx];
+  document.getElementById('cmeta-'+day+'-'+idx).innerHTML=exo.sets+'×'+exo.reps+' · '+fmtRest(exo.rest)+' · <b>'+val+' kg</b>';
+  document.getElementById('wbody-'+day+'-'+idx).classList.remove('open');
+}
+
+function toggleEdit(day,idx){
+  var body=document.getElementById('edit-body-'+day+'-'+idx);
+  var ico=document.getElementById('edit-ico-'+day+'-'+idx);
+  body.classList.toggle('open');
+  ico.classList.toggle('open');
+}
+
+function saveEdit(day,idx){
+  var newName=document.getElementById('edit-name-'+day+'-'+idx).value.trim();
+  var newSets=parseInt(document.getElementById('edit-sets-'+day+'-'+idx).value)||1;
+  var newReps=document.getElementById('edit-reps-'+day+'-'+idx).value.trim();
+  var newRest=parseInt(document.getElementById('edit-rest-'+day+'-'+idx).value)||0;
+  if(!newName)return;
+  var days=getDays();
+  days[day].exos[idx].name=newName;
+  days[day].exos[idx].sets=newSets;
+  days[day].exos[idx].reps=newReps;
+  days[day].exos[idx].rest=newRest;
+  saveDays(days);
+  // reset sets state for this exo
+  saveSets(day,idx,[]);
+  renderDay(day);
+  updateProgress();
+}
+
+function resetDay(day){
+  if(!confirm('Réinitialiser les séries de la séance '+getDays()[day].label+' ?'))return;
+  getDays()[day].exos.forEach(function(e,i){
+    saveSets(day,i,[]);
+    for(var s=0;s<e.sets;s++){
+      var dot=document.getElementById('dot-'+day+'-'+i+'-'+s);
+      if(dot)dot.style.cssText='';
+    }
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  var days=getDays();
+  var data=days[currentDay];
+  var total=data.exos.reduce(function(a,e){return a+e.sets;},0);
+  var done=data.exos.reduce(function(a,e,i){return a+getSets(currentDay,i).length;},0);
+  var pct=total>0?Math.round((done/total)*100):0;
+  document.getElementById('progLbl').textContent=done+' / '+total+' séries';
+  document.getElementById('progPct').textContent=pct+'%';
+  var fill=document.getElementById('progFill');
+  fill.style.width=pct+'%';
+  fill.style.background=COLORS[currentDay].bg;
+}
+
+function checkSessionComplete(day){
+  var days=getDays();
+  var allDone=days[day].exos.every(function(e,i){return getSets(day,i).length>=e.sets;});
+  if(allDone){
+    var key='completed_'+day+'_'+new Date().toDateString();
+    if(!ls(key,false)){lsSet(key,true);var n=ls('streak_count',0)+1;lsSet('streak_count',n);updateStreak();}
+  }
+}
+
+function updateStreak(){
+  var n=ls('streak_count',0);
+  document.getElementById('streakBadge').textContent=n+' séance'+(n>1?'s':'');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderAll();
+checkRestoredTimer();
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden)checkRestoredTimer();
+});
+</script>
+</body>
+</html>
